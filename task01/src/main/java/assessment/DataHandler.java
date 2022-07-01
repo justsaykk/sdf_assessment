@@ -1,17 +1,22 @@
 package assessment;
 
-public class DataHandler {
+import java.util.HashMap;
+import java.util.Map;
 
-    public void read(String data) {
+public class DataHandler {
+    Map<String, String> dataRow = new HashMap<>();
+
+    public Map<String, String> read(String data) {
         if ((data == null) || (data.trim().length() <= 0))
-            return;
+            return dataRow;
 
         String[] fields = data.split(",");
-        String first_name = removeQ(fields[0]);
-        String address = removeQ(fields[2]);
-        String years = removeQ(fields[3]);
 
-        System.out.printf("FirstName: %s, address: %s, years: %s \n", first_name, address, years);
+        dataRow.put("first_name", removeQ(fields[0]));
+        dataRow.put("address", removeQ(fields[2]));
+        dataRow.put("years", removeQ(fields[3]));
+
+        return dataRow;
     }
 
     private String removeQ(String s) {
