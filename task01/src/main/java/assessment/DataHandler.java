@@ -1,22 +1,28 @@
 package assessment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataHandler {
-    Map<String, String> dataRow = new HashMap<>();
 
-    public Map<String, String> read(String data) {
-        if ((data == null) || (data.trim().length() <= 0))
-            return dataRow;
-
-        String[] fields = data.split(",");
-
-        dataRow.put("first_name", removeQ(fields[0]));
-        dataRow.put("address", removeQ(fields[2]));
-        dataRow.put("years", removeQ(fields[3]));
-
+    public Map<String, String> read(List<String> header, List<String> data) {
+        Map<String, String> dataRow = new HashMap<>();
+        for (int i = 0; i < header.size(); i++) {
+            dataRow.put(header.get(i), data.get(i));
+        }
         return dataRow;
+    }
+
+    public List<String> toList(String string) {
+        List<String> list = new ArrayList<>();
+        String[] stringArr = string.split(",");
+        System.out.println("Processing >> " + string);
+        for (String el : stringArr) {
+            list.add(removeQ(el));
+        }
+        return list;
     }
 
     private String removeQ(String s) {
