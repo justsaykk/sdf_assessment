@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,6 @@ public class TWriter {
     public void write(Map<String, String> readData, String templateFile)
             throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(templateFile));
-        System.out.println(readData);
         String line;
         while ((line = br.readLine()) != null) {
             String[] splitLine = line.split("__");
@@ -27,7 +27,13 @@ public class TWriter {
                     }
                 }
             }
-            System.out.println(splitList);
+            String newLine = splitList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace("\\n", "\n")
+                    .replace(", ", "");
+            System.out.println(newLine);
         }
+        br.close();
     }
 }
