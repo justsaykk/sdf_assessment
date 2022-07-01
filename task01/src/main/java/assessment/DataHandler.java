@@ -18,7 +18,6 @@ public class DataHandler {
     public List<String> toList(String string) {
         List<String> list = new ArrayList<>();
         String[] stringArr = string.split(",");
-        System.out.println("Processing >> " + string);
         for (String el : stringArr) {
             list.add(removeQ(el));
         }
